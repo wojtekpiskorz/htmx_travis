@@ -40,6 +40,24 @@ app.get("/users", async (req, res) => {
   }, 1000);
 });
 
+// Handle POST request for temp conversion 
+
+app.post("/convert", (req, res) => {
+  setTimeout(() => {
+
+    const fahrenheit = parseFloat(req.body.fahrenheit);
+
+    const celsius = (fahrenheit - 32) * (5 / 9);
+
+    res.send(`
+    <p>
+    ${fahrenheit}°F = ${celsius.toFixed(2)}°C
+    </p>
+    `)
+
+  }, 1500);
+});
+
 // start the server
 
 app.listen(3000, () => {
