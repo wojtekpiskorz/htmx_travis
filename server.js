@@ -23,15 +23,21 @@ app.get("/users", async (req, res) => {
   //   { id: 3, name: "Josh Adult" },
   // ];
 
-  const response = await fetch("https://jsonplaceholder.typicode.com/users");
-  const users = await response.json();
+  setTimeout(async () => {
 
-  res.send(`
-  <h1 class="text-2xl text-center">Users</h1>
-  <ul>
+    const limit = req.query.limit || 10;
+
+
+    const response = await fetch(`https://jsonplaceholder.typicode.com/users?_limit=${limit}`);
+    const users = await response.json();
+
+    res.send(`
+    <h1 class="text-2xl text-center">Users</h1>
+    <ul>
     ${users.map((user) => `<li>${user.name}</li>`).join("")}
-  </ul>
-  `)
+    </ul>
+    `)
+  }, 1000);
 });
 
 // start the server
